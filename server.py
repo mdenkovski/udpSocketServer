@@ -34,7 +34,7 @@ def connectionLoop(sock):
             #print(m)
            # for c in clients:
            #    sock.sendto(bytes(m,'utf8'), (c[0],c[1]))
-
+            print("Player COnnected: ", addr)
             #send updated client list to all clients
             GameState = {"cmd": 0, "players": []}
             for c in clients:
@@ -75,7 +75,7 @@ def gameLoop(sock):
    while True:
       GameState = {"cmd": 1, "players": []}
       clients_lock.acquire()
-      #print (clients)
+      print (clients)
       for c in clients:
          player = {}
          clients[c]['color'] = {"R": random.random(), "G": random.random(), "B": random.random()}
@@ -86,7 +86,7 @@ def gameLoop(sock):
          player['posZ'] =  clients[c]['posZ']
          GameState['players'].append(player)
       s=json.dumps(GameState)
-      #print(s)
+      print(s)
       for c in clients:
          sock.sendto(bytes(s,'utf8'), (c[0],c[1]))
       clients_lock.release()
