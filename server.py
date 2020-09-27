@@ -46,7 +46,7 @@ def connectionLoop(sock):
                player['posZ'] = clients[c]['posZ']
                GameState['players'].append(player)
             s=json.dumps(GameState)
-            print("Sending gamestate to all clients: " , s)
+            #print("Sending gamestate to all clients: " , s)
             for c in clients:
                sock.sendto(bytes(s,'utf8'), (c[0],c[1]))
             
@@ -60,10 +60,12 @@ def cleanClients(sock):
             print('Dropped Client: ', c)
             message = {"cmd": 2,"player":{"id":str(c)}}
             m = json.dumps(message)
+            #print(m)
             clients_lock.acquire()
             del clients[c]
             clients_lock.release()
             #send the remaining clients which client dropped
+            #print(clients)
             for remainingClient in clients:
                sock.sendto(bytes(m,'utf8'), (remainingClient[0],remainingClient[1]))
 
