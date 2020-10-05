@@ -22,28 +22,28 @@ def connectionLoop(sock):
          if 'connect' in data:
             clients[addr] = {}
             clients[addr]['lastBeat'] = datetime.now()
-            clients[addr]['color'] = 0
-            posX = random.randrange(0,10)
-            posY = random.randrange(0,10)
-            posZ = random.randrange(0,10)
-            clients[addr]['posX'] = posX
-            clients[addr]['posY'] = posY
-            clients[addr]['posZ'] = posZ
+            #clients[addr]['color'] = 0
+            #posX = random.randrange(0,10)
+            #posY = random.randrange(0,10)
+            #posZ = random.randrange(0,10)
+            #clients[addr]['posX'] = posX
+            #clients[addr]['posY'] = posY
+            #clients[addr]['posZ'] = posZ
             #message = {"cmd": 0,"player":{"id":str(addr)}}
             #m = json.dumps(message)
             #print(m)
-           # for c in clients:
-           #    sock.sendto(bytes(m,'utf8'), (c[0],c[1]))
-            print("Player COnnected: ", addr)
+            # for c in clients:
+            #    sock.sendto(bytes(m,'utf8'), (c[0],c[1]))
+            print("Player Connected: ", addr)
             #send updated client list to all clients
             GameState = {"cmd": 0, "players": []}
             for c in clients:
                player = {}
                player['id'] = str(c)
-               player['color'] = clients[c]['color']
-               player['posX'] = clients[c]['posX']
-               player['posY'] = clients[c]['posY']
-               player['posZ'] = clients[c]['posZ']
+               #player['color'] = clients[c]['color']
+               #player['posX'] = clients[c]['posX']
+               #player['posY'] = clients[c]['posY']
+               #player['posZ'] = clients[c]['posZ']
                GameState['players'].append(player)
             s=json.dumps(GameState)
             #print("Sending gamestate to all clients: " , s)
@@ -78,9 +78,9 @@ def gameLoop(sock):
       print (clients)
       for c in clients:
          player = {}
-         clients[c]['color'] = {"R": random.random(), "G": random.random(), "B": random.random()}
+         #clients[c]['color'] = {"R": random.random(), "G": random.random(), "B": random.random()}
          player['id'] = str(c)
-         player['color'] = clients[c]['color']
+         #player['color'] = clients[c]['color']
          player['posX'] =  clients[c]['posX']
          player['posY'] =  clients[c]['posY']
          player['posZ'] =  clients[c]['posZ']
